@@ -16,20 +16,6 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
-// const upload = multer({
-//     storage: storage,
-//     fileFilter: function (req, file, cb) {
-//         const fileTypes = /jpeg|jpg|png/;
-//         const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-//         const mimetype = fileTypes.test(file.mimetype);
-        
-//         if (mimetype && extname) {
-//             return cb(null, true);
-//         } else {
-//             cb('Error: Images Only!');
-//         }
-//     }
-// });
 
 employeeRoutes.use(auth);
 
@@ -56,60 +42,6 @@ employeeRoutes.post('/create', async (req, res) => {
     }
 });
 
-// Serve static files from the "uploads" directory
-
-// employeeRoutes.use('/uploads', express.static('uploads'));
-
-// employeeRoutes.post('/create', upload.single('image'), async (req, res) => {
-//     const newEmployeeData = req.body;
-//     newEmployeeData.userId = req.body.userId; // Add the userId to the employee data
-
-//     if (req.file) {
-//         newEmployeeData.image = req.file.path; // Add the file path to the employee data
-//     } else {
-//         return res.status(400).send({ message: 'Image is required' });
-//     }
-
-//     try {
-//         // Check if the email already exists
-//         const existingEmployee = await EmployeeModel.findOne({ email: newEmployeeData.email });
-//         if (existingEmployee) {
-//             return res.status(400).send({ message: 'Email already exists' });
-//         }
-
-//         // Create a new employee document
-//         const newEmployee = new EmployeeModel(newEmployeeData);
-
-//         // Save the new employee document, triggering schema validations
-//         await newEmployee.save();
-
-//         res.status(201).send({ message: 'Employee Created Successfully!', newEmployee });
-//     } catch (err) {
-//         res.status(400).send({ error: err.message });
-//     }
-// });
-
-// employeeRoutes.get("/get", async (req, res) => {
-//     const { name } = req.query;
-//     const userId = req.body.userId;
-//    console.log(name,"name")
-//     try {
-//         const query = {}
-//         if (name) {
-//             query.name = { $regex: name, $options: "i" }; // Case-insensitive search
-//             console.log(query.name,"quarry")
-//             const employees = await EmployeeModel.find({query,userId });
-//             res.status(200).send(employees);
-//         }else{
-//             const employees = await EmployeeModel.find({userId });
-//             res.status(200).send(employees);
-
-//         }
-   
-//     } catch (err) {
-//         res.status(400).send({ error: err.message });
-//     }
-// });
 
 employeeRoutes.get("/get", async (req, res) => {
     const { name } = req.query;
