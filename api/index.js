@@ -5,8 +5,8 @@ const Port = process.env.PORT || 8000
 // const connection = require('./Config/db')
 const mongoose = require('mongoose')
 const cors = require("cors")
-const { userRouter } = require("./Routers/UserRouter")
-const {  employeeRoutes } = require("./Routers/EmployeeRouter")
+const { userRouter } = require("../Routers/UserRouter")
+const {  employeeRoutes } = require("../Routers/EmployeeRouter")
 app.use(cors())
 app.use(express.json())
 app.use("/users",userRouter)
@@ -28,3 +28,5 @@ app.listen(Port,async()=>{
         console.log(error)
     } 
 })
+
+module.exports = app;
